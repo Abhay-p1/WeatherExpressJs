@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon.jpg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/style.css">
+    <title>Weather App</title>
+</head>
+<body>
+    {{>navbar}}
+    <!-- main home -->
+    <div class="container-fluid cmlass main_home">
+      <div class="row">
+          <div class="col-md-12 col-12 mx-auto mb-3 p-4">
+              <div class="main_content">
+                  <form class="formc">
+                      <input type="text" class="inpu" id="cityname" placeholder="Enter your city name" autocomplete="off"> 
+                      <input type="submit" value="search" id="sbtn">
+                  </form>
+              </div>
+              <div class="temp_info">
+                <div class="toplayer">
+                    <p id="date">9 Dec</p>
+                    <p id="time">1:27 PM</p>
+                    <p id="day">Tuesday</p>
+                </div>
+                <div class="main_output">
+                    <p id="cityout">Output Shown Here</p>
+                    <div class="middle_layer data_hide">
+                        <p id="temp"><span id="temp_real">0<sup>o</sup>C</span></p>
+                        <p id="status"><i class="fa fa-cloud" aria-hidden="true"></i></p>
+                    </div>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- footer -->
+         <!-- Footer -->
+    {{>footer}}
+    <script src="js/main.js"></script>
+    <script>
+    const dayEle = document.getElementById('day');
+   const getCurrentDay = ()=>{
+    var weekday =  new Array(7);
+    weekday[0]="Sunday";
+    weekday[1]="Monday";
+    weekday[2]="Tuesday";
+    weekday[3]="Wednesday";
+    weekday[4]="Thrusday";
+    weekday[5]="Friday";
+    weekday[6]="Saturday";
+    let curr=new Date();
+    const dayInx = curr.getDay();
+    dayEle.innerText = weekday[dayInx];
+   }
+   getCurrentDay();
+   const dateMonth = document.getElementById('date');
+   const timeEle = document.getElementById('time');
+    const getCurrvalues = () =>{
+            var months = ["Jan", "Feb", "Mar", "Apr", "May", "June","July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+            const currData = new Date();
+            var monthNo = currData.getMonth()+1;
+            var month = months[monthNo-1];
+            var date = currData.getDate();
+            let hours=currData.getHours();
+            let mins = currData.getMinutes();
+            let period = 'AM';
+            if(hours>12){
+                period='PM';
+                if(hours>12) hours-=12;
+            }
+            else if(hours==0){
+                hours=12;
+            }
+            if(mins<10) mins="0"+mins;
+            dateMonth.innerHTML = `<i class="fad fa-calendar-week"></i>  ${date} ${month}`;
+            timeEle.innerHTML = `<i class="far fa-clock"></i> ${hours} : ${mins} ${period}`;
+        }
+        getCurrvalues();
+    </script>
+<!-- Footer -->
+</body>
+</html>
